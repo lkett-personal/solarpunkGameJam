@@ -23,7 +23,6 @@ grow_vertical = 0
 alignment = 1
 
 [node name="Panel" type="Panel" parent="Hotbar" unique_id=1351919833]
-clip_contents = true
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_yj1xu")
@@ -43,6 +42,17 @@ offset_bottom = 16.0
 texture = ExtResource("2_gdt2y")
 expand_mode = 1
 stretch_mode = 2
+
+[node name="Cost" type="Label" parent="Hotbar/Panel" unique_id=1460801288]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -10.0
+offset_right = 19.0
+offset_bottom = 10.0
+theme_override_fonts/font = ExtResource("3_yev5y")
+theme_override_font_sizes/font_size = 8
+text = "100"
+horizontal_alignment = 1
 
 [node name="Panel2" type="Panel" parent="Hotbar" unique_id=1021493938]
 custom_minimum_size = Vector2(16, 16)
