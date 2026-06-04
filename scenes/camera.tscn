@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://c648fsra57m3i"]
+
+[ext_resource type="Script" uid="uid://o67vva5qrfc7" path="res://scripts/camera.gd" id="1_cvpoc"]
+
+[node name="CameraHolder" type="Node2D" unique_id=1046478032]
+script = ExtResource("1_cvpoc")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1889076042]
+limit_enabled = false
+limit_left = -320
+limit_top = -180
+limit_right = 320
+limit_bottom = 180
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0

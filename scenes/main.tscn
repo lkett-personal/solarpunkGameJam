@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://btxo2b3hwpd12"]
+
+[ext_resource type="PackedScene" uid="uid://c648fsra57m3i" path="res://scenes/camera.tscn" id="1_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://d2dswqy0x1bho" path="res://scenes/world.tscn" id="2_sugp2"]
+[ext_resource type="PackedScene" uid="uid://cmvnwh4eaxn7p" path="res://scenes/ui.tscn" id="3_sugp2"]
+
+[node name="Main" type="Node2D" unique_id=778410351]
+
+[node name="CameraHolder" parent="." unique_id=1046478032 instance=ExtResource("1_0wfyh")]
+
+[node name="World" parent="." unique_id=482250912 instance=ExtResource("2_sugp2")]
+
+[node name="UI" parent="." unique_id=1455474925 instance=ExtResource("3_sugp2")]

@@ -1,0 +1,115 @@
+[gd_scene format=3 uid="uid://cmvnwh4eaxn7p"]
+
+[ext_resource type="Texture2D" uid="uid://86b6njb2h87k" path="res://sprites/ui/ui_hotbar.png" id="1_nt7q6"]
+[ext_resource type="Texture2D" uid="uid://4n1fu0pogm0q" path="res://sprites/ui/icons.png" id="2_gdt2y"]
+[ext_resource type="Texture2D" uid="uid://clbhiij8qk1oj" path="res://sprites/ui/ui_leaves.png" id="2_x4jx1"]
+[ext_resource type="FontFile" uid="uid://cxb7qu1et5f8e" path="res://style/kenney_kenney-fonts/Fonts/Kenney Mini.ttf" id="3_yev5y"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yj1xu"]
+
+[node name="UI" type="CanvasLayer" unique_id=1455474925]
+
+[node name="Hotbar" type="HBoxContainer" parent="." unique_id=1720154373]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.95
+anchor_right = 0.5
+anchor_bottom = 0.95
+offset_left = -8.0
+offset_top = -16.0
+offset_right = 8.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="Panel" type="Panel" parent="Hotbar" unique_id=1351919833]
+clip_contents = true
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_yj1xu")
+
+[node name="Outline" type="TextureRect" parent="Hotbar/Panel" unique_id=157367796]
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("1_nt7q6")
+
+[node name="Icon" type="TextureRect" parent="Hotbar/Panel" unique_id=824234629]
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture = ExtResource("2_gdt2y")
+expand_mode = 1
+stretch_mode = 2
+
+[node name="Panel2" type="Panel" parent="Hotbar" unique_id=1021493938]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_yj1xu")
+
+[node name="Outline" type="TextureRect" parent="Hotbar/Panel2" unique_id=220139094]
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("1_nt7q6")
+
+[node name="Panel3" type="Panel" parent="Hotbar" unique_id=1935446359]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_yj1xu")
+
+[node name="Outline" type="TextureRect" parent="Hotbar/Panel3" unique_id=482333807]
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("1_nt7q6")
+
+[node name="Panel4" type="Panel" parent="Hotbar" unique_id=1487844553]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_yj1xu")
+
+[node name="Outline" type="TextureRect" parent="Hotbar/Panel4" unique_id=738982961]
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture = ExtResource("1_nt7q6")
+
+[node name="Panel5" type="Panel" parent="Hotbar" unique_id=1704999527]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_yj1xu")
+
+[node name="Outline" type="TextureRect" parent="Hotbar/Panel5" unique_id=399365706]
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("1_nt7q6")
+
+[node name="LeafCounter" type="HBoxContainer" parent="." unique_id=1662065831]
+offset_right = 37.0
+offset_bottom = 16.0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="LeafCounter" unique_id=1711644307]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+texture = ExtResource("2_x4jx1")
+expand_mode = 2
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="LeafCounter" unique_id=1086731879]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_yev5y")
+theme_override_font_sizes/font_size = 8
+text = "1,000"
+horizontal_alignment = 1
+vertical_alignment = 1
