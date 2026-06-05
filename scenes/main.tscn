@@ -9,5 +9,6 @@
 [node name="CameraHolder" parent="." unique_id=1046478032 instance=ExtResource("1_0wfyh")]
 
 [node name="World" parent="." unique_id=482250912 instance=ExtResource("2_sugp2")]
+buildings = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, 0)])
 
 [node name="UI" parent="." unique_id=1455474925 instance=ExtResource("3_sugp2")]

@@ -8,14 +8,20 @@
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rwgxs"]
 texture = ExtResource("1_nnsk1")
 0:0/0 = 0
+0:0/0/custom_data_0 = "soil"
 1:0/0 = 0
+1:0/0/custom_data_0 = "muck"
 0:1/0 = 0
+0:1/0/custom_data_0 = "grass"
 1:1/0 = 0
 1:2/0 = 0
+1:2/0/custom_data_0 = "rock"
 
 [sub_resource type="TileSet" id="TileSet_4wyf3"]
 tile_shape = 1
 tile_size = Vector2i(16, 8)
+custom_data_layer_0/name = "cell_type"
+custom_data_layer_0/type = 4
 sources/0 = SubResource("TileSetAtlasSource_rwgxs")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k0juu"]
@@ -30,12 +36,15 @@ sources/0 = SubResource("TileSetAtlasSource_k0juu")
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4wyf3"]
 texture = ExtResource("1_nnsk1")
 2:0/0 = 0
+2:0/0/texture_origin = Vector2i(0, 8)
 3:0/size_in_atlas = Vector2i(1, 2)
 3:0/0 = 0
+3:0/0/texture_origin = Vector2i(0, 16)
 2:1/0 = 0
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_4wyf3"]
 scenes/1/scene = ExtResource("3_4wyf3")
+scenes/1/display_placeholder = true
 
 [sub_resource type="TileSet" id="TileSet_k0juu"]
 tile_shape = 1

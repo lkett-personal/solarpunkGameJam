@@ -1,11 +1,13 @@
 [gd_scene format=3 uid="uid://cmvnwh4eaxn7p"]
 
 [ext_resource type="Texture2D" uid="uid://86b6njb2h87k" path="res://sprites/ui/ui_hotbar.png" id="1_nt7q6"]
-[ext_resource type="Texture2D" uid="uid://4n1fu0pogm0q" path="res://sprites/ui/icons.png" id="2_gdt2y"]
 [ext_resource type="Texture2D" uid="uid://clbhiij8qk1oj" path="res://sprites/ui/ui_leaves.png" id="2_x4jx1"]
 [ext_resource type="FontFile" uid="uid://cxb7qu1et5f8e" path="res://style/kenney_kenney-fonts/Fonts/Kenney Mini.ttf" id="3_yev5y"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yj1xu"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yev5y"]
+load_path = "res://.godot/imported/icons.png-f70b1f4092a737327f83f8c1b60d5c39.ctex"
 
 [node name="UI" type="CanvasLayer" unique_id=1455474925]
 
@@ -36,10 +38,12 @@ grow_vertical = 0
 texture = ExtResource("1_nt7q6")
 
 [node name="Icon" type="TextureRect" parent="Hotbar/Panel" unique_id=824234629]
+visible = false
+clip_contents = true
 layout_mode = 0
 offset_right = 16.0
 offset_bottom = 16.0
-texture = ExtResource("2_gdt2y")
+texture = SubResource("CompressedTexture2D_yev5y")
 expand_mode = 1
 stretch_mode = 2
 
@@ -67,6 +71,28 @@ grow_horizontal = 2
 grow_vertical = 0
 texture = ExtResource("1_nt7q6")
 
+[node name="Icon" type="TextureRect" parent="Hotbar/Panel2" unique_id=1142547132]
+visible = false
+clip_contents = true
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture = SubResource("CompressedTexture2D_yev5y")
+expand_mode = 1
+stretch_mode = 2
+
+[node name="Cost" type="Label" parent="Hotbar/Panel2" unique_id=297389385]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -10.0
+offset_right = 19.0
+offset_bottom = 10.0
+theme_override_fonts/font = ExtResource("3_yev5y")
+theme_override_font_sizes/font_size = 8
+text = "200"
+horizontal_alignment = 1
+
 [node name="Panel3" type="Panel" parent="Hotbar" unique_id=1935446359]
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
@@ -80,6 +106,28 @@ grow_horizontal = 2
 grow_vertical = 0
 texture = ExtResource("1_nt7q6")
 
+[node name="Icon" type="TextureRect" parent="Hotbar/Panel3" unique_id=1264151234]
+visible = false
+clip_contents = true
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture = SubResource("CompressedTexture2D_yev5y")
+expand_mode = 1
+stretch_mode = 2
+
+[node name="Cost" type="Label" parent="Hotbar/Panel3" unique_id=942280588]
+visible = false
+layout_mode = 0
+offset_left = -1.0
+offset_top = -10.0
+offset_right = 19.0
+offset_bottom = 10.0
+theme_override_fonts/font = ExtResource("3_yev5y")
+theme_override_font_sizes/font_size = 8
+text = "100"
+horizontal_alignment = 1
+
 [node name="Panel4" type="Panel" parent="Hotbar" unique_id=1487844553]
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
@@ -90,6 +138,28 @@ layout_mode = 0
 offset_right = 16.0
 offset_bottom = 16.0
 texture = ExtResource("1_nt7q6")
+
+[node name="Icon" type="TextureRect" parent="Hotbar/Panel4" unique_id=930267486]
+visible = false
+clip_contents = true
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture = SubResource("CompressedTexture2D_yev5y")
+expand_mode = 1
+stretch_mode = 2
+
+[node name="Cost" type="Label" parent="Hotbar/Panel4" unique_id=849588516]
+visible = false
+layout_mode = 0
+offset_left = -1.0
+offset_top = -10.0
+offset_right = 19.0
+offset_bottom = 10.0
+theme_override_fonts/font = ExtResource("3_yev5y")
+theme_override_font_sizes/font_size = 8
+text = "100"
+horizontal_alignment = 1
 
 [node name="Panel5" type="Panel" parent="Hotbar" unique_id=1704999527]
 custom_minimum_size = Vector2(16, 16)
@@ -104,6 +174,28 @@ grow_horizontal = 2
 grow_vertical = 0
 texture = ExtResource("1_nt7q6")
 
+[node name="Icon" type="TextureRect" parent="Hotbar/Panel5" unique_id=594510111]
+visible = false
+clip_contents = true
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture = SubResource("CompressedTexture2D_yev5y")
+expand_mode = 1
+stretch_mode = 2
+
+[node name="Cost" type="Label" parent="Hotbar/Panel5" unique_id=1087268658]
+visible = false
+layout_mode = 0
+offset_left = -1.0
+offset_top = -10.0
+offset_right = 19.0
+offset_bottom = 10.0
+theme_override_fonts/font = ExtResource("3_yev5y")
+theme_override_font_sizes/font_size = 8
+text = "100"
+horizontal_alignment = 1
+
 [node name="LeafCounter" type="HBoxContainer" parent="." unique_id=1662065831]
 offset_right = 37.0
 offset_bottom = 16.0
@@ -116,7 +208,7 @@ texture = ExtResource("2_x4jx1")
 expand_mode = 2
 stretch_mode = 3
 
-[node name="Label" type="Label" parent="LeafCounter" unique_id=1086731879]
+[node name="Label" type="Label" parent="LeafCounter" unique_id=1086731879 groups=["money_counter"]]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_yev5y")
 theme_override_font_sizes/font_size = 8
