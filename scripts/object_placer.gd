@@ -3,6 +3,7 @@ extends Node2D
 @onready var building_outline = $TileOutline
 @onready var props = $Props
 @onready var ground = $Ground
+@onready var old_buildings = $Buildings
 @onready var money_label: Label = get_tree().get_first_node_in_group("money_counter")
 
 var money: int = 1000
@@ -18,14 +19,18 @@ func _physics_process(_delta: float) -> void:
 	building_outline.global_position = props.map_to_local(props.local_to_map(get_global_mouse_position()))
 	
 	if Input.is_action_just_pressed("ui_1"):
-		current_building = Machine.new().get_turbine()
+		current_building = Turbine.new().init()
 	elif Input.is_action_just_pressed("ui_2"):
-		current_building = Machine.new().get_toxin_scrubber()
+		current_building = ToxinScrubber.new().init()
+	elif Input.is_action_just_pressed("ui_3"):
+		current_building = WaterPump.new().init()
+	elif Input.is_action_just_pressed("ui_4"):
+		current_building = House.new().init()
 		
 	
 	if Input.is_action_just_pressed("place_building") and current_building != null and current_building.cost <= money:
 		current_building.tile_pos = props.local_to_map(building_outline.global_position)
-		if buildings.has(current_building.tile_pos) == false:
+		if buildings.has(current_building.tile_pos) == false and old_buildings.get_cell_tile_data(current_building.tile_pos) == null:
 			var custom_tile_data = ground.get_cell_tile_data(current_building.tile_pos)
 			
 			if custom_tile_data == null:
@@ -54,38 +59,23 @@ func _physics_process(_delta: float) -> void:
 			var placed_building = current_building
 			
 			if placed_building.generates_energy:
-				affect_buildings(placed_building.tile_pos, placed_building.effect_radius)
+				placed_building.affect_buildings(placed_building.tile_pos, placed_building.effect_radius, ground, powered_cells)
 			elif placed_building.restores_tiles:
-				affect_tiles(placed_building.tile_pos, placed_building.effect_radius)
-
-func affect_buildings(center_pos: Vector2i, radius: int) -> void:
-	var check_range = radius + 2 
+				placed_building.affect_tiles(placed_building.tile_pos, placed_building.effect_radius, ground, restored_variants)
+			elif placed_building.restores_water:
+				placed_building.affect_water(placed_building.tile_pos, placed_building.effect_radius, ground, restored_variants)
 	
-	var center_pixel: Vector2 = ground.map_to_local(center_pos)
-	var single_tile_width: float = ground.map_to_local(center_pos + Vector2i(1, 0)).distance_to(center_pixel)
-	
-	var max_pixel_distance: float = (radius * single_tile_width) + 2.0
-
-	for offset_x in range(-check_range, check_range + 1):
-		for offset_y in range(-check_range, check_range + 1):
-			var tile_pos = center_pos + Vector2i(offset_x, offset_y)
-			var target_pixel: Vector2 = ground.map_to_local(tile_pos)
+	if Input.is_action_just_pressed("break_building"):
+		var tile_pos = old_buildings.local_to_map(building_outline.global_position)
+		
+		if old_buildings.get_cell_tile_data(tile_pos) != null:
+			old_buildings.erase_cell(tile_pos)
+			money += 50
+			money_label.text = str(money)
 			
-			if center_pixel.distance_to(target_pixel) <= max_pixel_distance:
-				powered_cells[tile_pos] = powered_cells.get(tile_pos, 0) + 1
-
-func affect_tiles(center_pos: Vector2i, radius: int) -> void:
-	var check_range = radius + 2
-	var center_pixel: Vector2 = ground.map_to_local(center_pos)
-	var single_tile_width: float = ground.map_to_local(center_pos + Vector2i(1, 0)).distance_to(center_pixel)
-	var max_pixel_distance: float = (radius * single_tile_width) + 2.0
-
-	for offset_x in range(-check_range, check_range + 1):
-		for offset_y in range(-check_range, check_range + 1):
-			var tile_pos = center_pos + Vector2i(offset_x, offset_y)
-			var target_pixel: Vector2 = ground.map_to_local(tile_pos)
-			
-			if center_pixel.distance_to(target_pixel) <= max_pixel_distance:
-				var atlas = ground.get_cell_atlas_coords(tile_pos)
-				if restored_variants.has(atlas):
-					ground.set_cell(tile_pos, 0, restored_variants[atlas])
+		if props.get_cell_tile_data(tile_pos) != null:
+			props.erase_cell(tile_pos)
+			props.erase_cell(tile_pos - Vector2i(0, Turbine.new().init().height * 3)) # erase the scene tile if there
+			buildings.erase(tile_pos)
+			money += 50
+			money_label.text = str(money)

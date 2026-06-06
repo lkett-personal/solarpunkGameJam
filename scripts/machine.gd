@@ -13,36 +13,53 @@ class_name Machine extends Node2D
 @export var effect_radius: int
 @export var has_power: bool
 @export var restores_tiles: bool
+@export var restores_water: bool
 @export var requires_power: bool
 
-func get_turbine() -> Machine:
-	var turbine = Machine.new()
-	turbine.height = 2
-	turbine.width = 1
-	turbine.depth = 1
-	turbine.cost = 100
-	turbine.atlas_coords = Vector2i(3, 0)
-	turbine.cell_type_requirement = "rock"
-	turbine.has_scene = true
-	turbine.effect_radius = 8
-	turbine.generates_energy = true
-	turbine.has_power = false
-	turbine.restores_tiles = false
-	turbine.requires_power = false
-	return turbine
+func affect_buildings(center_pos: Vector2i, radius: int, ground: TileMapLayer, powered_cells: Dictionary) -> void:
+	var check_range = radius + 2 
 	
-func get_toxin_scrubber() -> Machine:
-	var toxin_scrubber = Machine.new()
-	toxin_scrubber.height = 1
-	toxin_scrubber.width = 1
-	toxin_scrubber.depth = 1
-	toxin_scrubber.cost = 250
-	toxin_scrubber.atlas_coords = Vector2i(2, 1)
-	toxin_scrubber.cell_type_requirement = "soil"
-	toxin_scrubber.has_scene = false
-	toxin_scrubber.effect_radius = 2
-	toxin_scrubber.generates_energy = false
-	toxin_scrubber.has_power = false
-	toxin_scrubber.restores_tiles = true
-	toxin_scrubber.requires_power = true
-	return toxin_scrubber
+	var center_pixel: Vector2 = ground.map_to_local(center_pos)
+	var single_tile_width: float = ground.map_to_local(center_pos + Vector2i(1, 0)).distance_to(center_pixel)
+	
+	var max_pixel_distance: float = (radius * single_tile_width) + 2.0
+
+	for offset_x in range(-check_range, check_range + 1):
+		for offset_y in range(-check_range, check_range + 1):
+			var tile_position = center_pos + Vector2i(offset_x, offset_y)
+			var target_pixel: Vector2 = ground.map_to_local(tile_position)
+			
+			if center_pixel.distance_to(target_pixel) <= max_pixel_distance:
+				powered_cells[tile_position] = powered_cells.get(tile_position, 0) + 1
+				
+func affect_tiles(center_pos: Vector2i, radius: int, ground: TileMapLayer, restored_variants: Dictionary) -> void:
+	var check_range = radius + 2
+	var center_pixel: Vector2 = ground.map_to_local(center_pos)
+	var single_tile_width: float = ground.map_to_local(center_pos + Vector2i(1, 0)).distance_to(center_pixel)
+	var max_pixel_distance: float = (radius * single_tile_width) + 2.0
+
+	for offset_x in range(-check_range, check_range + 1):
+		for offset_y in range(-check_range, check_range + 1):
+			var tile_position = center_pos + Vector2i(offset_x, offset_y)
+			var target_pixel: Vector2 = ground.map_to_local(tile_position)
+			
+			if center_pixel.distance_to(target_pixel) <= max_pixel_distance:
+				var atlas = ground.get_cell_atlas_coords(tile_position)
+				if restored_variants.has(atlas) and atlas == Vector2i(0, 0):
+					ground.set_cell(tile_position, 0, restored_variants[atlas])
+					
+func affect_water(center_pos: Vector2i, radius: int, ground: TileMapLayer, restored_variants: Dictionary) -> void:
+	var check_range = radius + 2
+	var center_pixel: Vector2 = ground.map_to_local(center_pos)
+	var single_tile_width: float = ground.map_to_local(center_pos + Vector2i(1, 0)).distance_to(center_pixel)
+	var max_pixel_distance: float = (radius * single_tile_width) + 2.0
+
+	for offset_x in range(-check_range, check_range + 1):
+		for offset_y in range(-check_range, check_range + 1):
+			var tile_position = center_pos + Vector2i(offset_x, offset_y)
+			var target_pixel: Vector2 = ground.map_to_local(tile_position)
+			
+			if center_pixel.distance_to(target_pixel) <= max_pixel_distance:
+				var atlas = ground.get_cell_atlas_coords(tile_position)
+				if restored_variants.has(atlas) and atlas == Vector2i(1, 0):
+					ground.set_cell(tile_position, 0, restored_variants[atlas])
